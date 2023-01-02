@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+    postgres:
+        image: postgres:15.1
+        restart: 'no'
+        environment:
+          - POSTGRES_USER=hrm
+          - POSTGRES_PASSWORD=admin123
+        logging:
+          options:
+            max-size: 10m
+            max-file: "3"
+        ports:
+          - '15432:5432'
+        volumes:
+          - /tmp/hrm/data/postgres-data:/var/lib/postgresql/data
+          # copy the sql script to create tables
+          #- ./sql/demo-small-en-20170815.sql:/docker-entrypoint-initdb.d/demo-small-en-20170815.sql
+          #- ./sql/demo-small-en-20170815.sql:/docker-entrypoint-initdb.d/demo-small-en-20170815.sql
+          #- ./sql/database-star-wars.sql:/docker-entrypoint-initdb.d/database-star-wars.sql
+        
